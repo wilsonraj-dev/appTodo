@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = Usuario.GET_ALL_USERS, query = "select u from Usuario u order by u.nome")
 public class Usuario extends AbstractEntity {
+    
+    public static final String GET_ALL_USERS = "Usuario.getAllUser";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,14 +23,6 @@ public class Usuario extends AbstractEntity {
     
     public String getNome() {
         return nome;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setNome(String nome) {

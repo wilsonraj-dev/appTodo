@@ -14,6 +14,15 @@ public class Tarefa extends AbstractEntity{
     @ManyToOne
     private Usuario usuario;
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+
     public String getDescricao() {
         return descricao;
     }
