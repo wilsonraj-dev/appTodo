@@ -38,6 +38,4 @@ public abstract class AbstractEntity {
     public void setDataAlteracao(LocalDate dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
-    
-    
 }
