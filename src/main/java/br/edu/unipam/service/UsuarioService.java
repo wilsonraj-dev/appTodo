@@ -1,6 +1,7 @@
 package br.edu.unipam.service;
 
 import br.edu.unipam.entity.Usuario;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ public class UsuarioService {
 
     //inserir
     public Usuario salvarUsuario(Usuario usuario) {
+        usuario.setDataCriacao(new Date());
         entityManager.persist(usuario);
         return usuario;
     }
@@ -38,6 +40,7 @@ public class UsuarioService {
         Usuario userBd = localizarPorId(usuario.getId());
 
         if (userBd != null) {
+            //usuario.setDataAlteracao(new Date());
             entityManager.merge(usuario);
             return usuario;
         }

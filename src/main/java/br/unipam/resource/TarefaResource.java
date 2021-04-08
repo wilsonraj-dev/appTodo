@@ -14,7 +14,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import static jdk.nashorn.internal.runtime.Debug.id;
 
 @Path("tarefa")
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,10 +29,10 @@ public class TarefaResource {
         List<Tarefa> tarefas = tarefaService.listar();     
         return Response.ok(tarefas).build();
     }
-    
-    @Path("listByUser")
+   
+    @Path("listByUser/{id}")
     @GET
-    public Response listarTarefaUsuaio(long id){
+    public Response listarTarefaUsuaio(@PathParam("id") long id){
         List<Tarefa> tarefas = tarefaService.listarPorUsuario(id);
         return Response.ok(tarefas).build();
      }
@@ -45,6 +44,7 @@ public class TarefaResource {
         Tarefa tarefaSalva = tarefaService.salvar(tarefa, idUser);
         return Response.ok(tarefaSalva).build();
     }
+    
     
     @PUT
     @Path("update/{id}")

@@ -2,12 +2,12 @@ package br.edu.unipam.service;
 
 import br.edu.unipam.entity.Tarefa;
 import br.edu.unipam.entity.Usuario;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 
 public class TarefaService {
@@ -21,12 +21,15 @@ public class TarefaService {
     //inserir
     public Tarefa salvar(Tarefa tarefa, Long id) {
         Usuario user = usuarioService.localizarPorId(id);
+        
         if (user != null)
         {
             tarefa.setUsuario(user);
+            tarefa.setDataCriacao(new Date());
             entityManager.persist(tarefa);
+            return tarefa;
         }
-        return tarefa;
+        return null;
     }
 
     //Encontrar usuário por ID
@@ -36,11 +39,13 @@ public class TarefaService {
     }
 
     //Remover
-    public void remover(Long id) {
+    public String remover(Long id) {
         Tarefa tarefa  = localizarPorId(id);
         if (tarefa != null) {
             entityManager.remove(tarefa);
+            return null;
         }
+        return "Erro";
     }
 
     //Editar
@@ -56,6 +61,7 @@ public class TarefaService {
             return null;
         }
         tarefa.setUsuario(userBd);
+        //tarefa.setDataAlteracao(new Date());
         entityManager.merge(tarefa);
         return tarefa;
     }
